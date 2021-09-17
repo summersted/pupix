@@ -1,0 +1,8 @@
+.carousel {
+    width: 600px;
+    height: 400px;
+}
+
+.carousel-item>img {
+    border-radius: 10px;
+}
