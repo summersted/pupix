@@ -22,10 +22,12 @@ ReactDOM.render(
           <Route exact path="/" component={Homepage} />
           <Route path="/login" component={LogIn} />
           <Route path="/signin" component={SignIn} />
+          <Route path="/mainpage" component={Homepage} />
           {/* <Route path="/search" component={Search} /> */}
+
         </Switch>
       </Router>
-      <Footer/>
+      {/* <Footer/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

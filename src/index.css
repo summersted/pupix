@@ -6,17 +6,11 @@ body {
     margin: 0;
     height: 100vh;
 }
-
+nav{
+    margin-bottom: 24px;
+}
 main {
-    width: 60%;
+    max-width: 1320px;
     margin: 0 auto;
     height: 100%;
-    margin-top: 100px;
-}
-
-footer {
-    position: absolute;
-    bottom: 20px;
-    width: 80%;
-    padding-left: 10%;
 }

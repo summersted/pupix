@@ -13,7 +13,7 @@ export default function NavMenu() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <LinkContainer to="/">
+                            <LinkContainer to="/mainpage">
                                 <Nav.Link href="#features">Features</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="/search">
