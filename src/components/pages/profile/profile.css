@@ -1,0 +1,12 @@
+.container-sm{
+    display: flex;
+    background-color: rgba(226, 224, 224, 0.5);
+    padding: 16px;
+    border-radius: 5px;
+}
+.vertical-separator{
+    width: 50px;
+}
+.wrapper-list{
+
+}
