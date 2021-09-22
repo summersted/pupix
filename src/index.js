@@ -13,6 +13,7 @@ import Homepage from './components/pages/homepage';
 import LogIn from './components/autorization/log-in';
 import SignIn from './components/autorization/sign-in';
 import Profile from './components/pages/profile/profile';
+import PageNotFound from './components/pages/PageNotFound/PageNotFound';
 import './index.css';
 // simple router using react-router-bootstrap inside <NavMenu/>
 ReactDOM.render(
@@ -25,7 +26,7 @@ ReactDOM.render(
           <Route path="/signin" component={SignIn} />
           <Route path="/mainpage" component={Homepage} />
           <Route path="/profile" component={Profile} />
-          {/* <Route component={Homepage} /> */}
+          <Route component={PageNotFound} />
 
           {/* <Route path="/search" component={Search} /> */}
 
