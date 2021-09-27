@@ -1,38 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { 
-  BrowserRouter as Router, 
-  Switch, 
-  Route } from "react-router-dom";
 
-import NavMenu from './components/layout/navbar';
-import Footer from './components/layout/footer';
-import Homepage from './components/pages/homepage';
-import LogIn from './components/autorization/log-in';
-import SignIn from './components/autorization/sign-in';
-import Profile from './components/pages/profile/profile';
-import PageNotFound from './components/pages/PageNotFound/PageNotFound';
 import './index.css';
-// simple router using react-router-bootstrap inside <NavMenu/>
+import App from './components/pages/app/';
+
 ReactDOM.render(
   <React.StrictMode>
-      <Router>
-        <NavMenu/>
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route path="/login" component={LogIn} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/mainpage" component={Homepage} />
-          <Route path="/profile" component={Profile} />
-          <Route component={PageNotFound} />
-
-          {/* <Route path="/search" component={Search} /> */}
-
-        </Switch>
-      </Router>
-      {/* <Footer/> */}
+      <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
