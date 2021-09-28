@@ -18,7 +18,9 @@ function SeasonList({ seasonList, show }) {
                                         <p>Ended: {item.endDate}</p>
                                         <p>Network: {item.network.name}</p>
                                         <p>Episode Order: {item.episodeOrder}</p>
-                                        {item.summary ? item.summary : null}
+                                        {item.summary ?
+                                            (<div dangerouslySetInnerHTML={{ __html: item.summary }}>
+                                        </div>) : null}
                                     </Tab>
                                 )
                             })

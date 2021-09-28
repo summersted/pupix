@@ -17,12 +17,13 @@ function EpisodesList({ episodesList, show }) {
                                         <Accordion.Body>
                                             <Row>
                                                 <Col>
-                                                    <Image src={item.image.medium} />
+                                                    {item.image ? (<Image src={item.image.medium} />) : null}
                                                 </Col>
                                                 <Col>
                                                     <p>Season {item.season} number {item.number}</p>
                                                     <p>Runtime: {item.runtime}</p>
-                                                    {item.summary}
+                                                    <div dangerouslySetInnerHTML={{ __html: item.summary }}>
+                                                    </div>
                                                 </Col>
                                             </Row>
 

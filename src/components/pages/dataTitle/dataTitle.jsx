@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function DataTitle({ data }) {
     const genresList = useCallback((ganresArray) => ganresArray.join(', '), []);
-
+    console.log(data);
     return (
         <>
             <Container fluid>
@@ -15,8 +15,8 @@ function DataTitle({ data }) {
                     <Col>
                         <Alert variant="light">
                             <Alert.Heading>{data.name}</Alert.Heading>
-                            {/* wrong display <p> below */}
-                            {data.summary}
+                            <div dangerouslySetInnerHTML={{ __html: data.summary }}>
+                            </div>
                             <hr />
                             <p className="mb-0">
                                 Status: {data.status}({data.status ? data.ended : "-"})
