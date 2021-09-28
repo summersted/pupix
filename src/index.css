@@ -14,3 +14,18 @@ main {
     margin: 0 auto;
     height: 100%;
 }
+img{
+    max-height: 100%;
+    height: auto;
+}
+.img-wrapper{
+    height: 600px;
+}
+.img-wrapper-medium{
+    height: 335px;
+    width: auto;
+    display: flex;
+}
+.img-no-photo{
+    margin: auto;
+}

@@ -3,7 +3,7 @@ import { Form, Button, Card } from "react-bootstrap";
 
 export default function SignIn() {
     return (
-        <>
+       <main>
             <Card>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -29,6 +29,6 @@ export default function SignIn() {
                     </Button>
                 </Form>
             </Card>
-        </>
+       </main>
     );
 }

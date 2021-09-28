@@ -39,3 +39,21 @@ export const getEpisodes = async (id) => {
         console.log(error);
     }
 }
+export const getResByQuerry = async (querry) => {
+    try {
+        const res = await fetch(`${__base_url}/search/shows?q=${querry}`)
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const getPeople = async (querry) => {
+    try {
+        const res = await fetch(`${__base_url}/search/people?q=${querry}`)
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}

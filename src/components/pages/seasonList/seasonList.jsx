@@ -1,14 +1,17 @@
 import { Row, Col, Tabs, Tab, Image } from "react-bootstrap";
 import './seasonList.css';
+import Preloader from "../preloader";
 
 function SeasonList({ seasonList, show }) {
     return (
         <>
             <Row>
-                <Col>
-                    {show ? (<Image src={show.image.original} rounded />) : 'loading...'}
+                <Col xs={4}>
+                    <div className="img-wrapper">
+                        {show ? (<Image src={show.image.original} rounded />) : <Preloader />}
+                    </div>
                 </Col>
-                <Col>
+                <Col xs={6}>
                     {seasonList ? (
                         <Tabs defaultActiveKey="Season_1" id="uncontrolled-tab-example" className="mb-3">
                             {seasonList.map((item, i) => {
@@ -20,13 +23,13 @@ function SeasonList({ seasonList, show }) {
                                         <p>Episode Order: {item.episodeOrder}</p>
                                         {item.summary ?
                                             (<div dangerouslySetInnerHTML={{ __html: item.summary }}>
-                                        </div>) : null}
+                                            </div>) : null}
                                     </Tab>
                                 )
                             })
                             }
                         </Tabs>
-                    ) : 'loading...'}
+                    ) : <Preloader />}
 
                 </Col>
             </Row>

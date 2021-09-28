@@ -9,10 +9,12 @@ function DataTitle({ data }) {
         <>
             <Container fluid>
                 <Row>
-                    <Col>
-                        <Image src={data.image.original} rounded />
+                    <Col xs={4}>
+                        <div className="img-wrapper">
+                            <Image src={data.image.original} rounded />
+                        </div>
                     </Col>
-                    <Col>
+                    <Col xs={6}>
                         <Alert variant="light">
                             <Alert.Heading>{data.name}</Alert.Heading>
                             <div dangerouslySetInnerHTML={{ __html: data.summary }}>

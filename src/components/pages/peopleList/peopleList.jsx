@@ -1,33 +1,31 @@
-import React, { useCallback } from 'react';
-import { Card, Button, Container, Col, Row } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import Preloader from '../preloader';
-import './List.css';
-function List({ moviesList }) {
-
-    const genresList = useCallback((ganresArray) => ganresArray.join(', '), []);
+import Preloader from "../preloader";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import React from "react";
+function PeopleList({ list }) {
 
     return (
         <>
-            {moviesList ? (
+            {list ? (
                 <Container>
                     <Row>
-                        {moviesList.map((item, i) => {
+                        {list.map((item, i) => {
                             return (
                                 <React.Fragment key={`${item?.id}`}>
                                     <Col xs={1} md={3}>
                                         <Card bg="dark" text="light">
                                             <div className="img-wrapper-medium">
                                                 {item?.image ? <Card.Img variant="top" src={item?.image?.medium} /> : 
-                                                <div className="img-no-photo">No photo</div> }
+                                                <div className="img-no-photo">No Photo</div> }
                                             </div>
                                             <Card.Body>
                                                 <Card.Title>{item?.name}</Card.Title>
-                                                <Card.Text><b>Ended:</b> {item?.ended ? item?.ended : '-'}</Card.Text>
-                                                <Card.Text><b>Genres:</b> {item?.genres?.length && genresList(item?.genres)}</Card.Text>
-                                                <Card.Text><b>Language:</b> {item?.language}</Card.Text>
-                                                <LinkContainer to={`/shows/${item?.id}`}>
-                                                    <Button variant="primary">Check it</Button>
+                                                <Card.Text><b>Gender:</b> {item?.gender}</Card.Text>
+                                                <Card.Text><b>Country:</b> {item?.country?.name}</Card.Text>
+                                                <Card.Text><b>Birthday</b> {item?.birthday}</Card.Text>
+                                                <Card.Text><b>Deathday:</b> {item?.deathday ? item?.deathday : '-'}</Card.Text>
+                                                <LinkContainer to={`/people/${item?.id}`}>
+                                                    <Button variant="primary">Watch profile</Button>
                                                 </LinkContainer>
                                             </Card.Body>
                                         </Card>
@@ -42,5 +40,4 @@ function List({ moviesList }) {
         </>
     )
 }
-
-export default List;
+export default PeopleList;

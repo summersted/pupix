@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import {getShowbyId} from '../../services';
 import DataTitle from '../dataTitle/dataTitle';
+import Preloader from '../preloader/preloader';
 function Show() {
     const {id} = useParams();
     const [showData, setShowData] = useState(null);
@@ -13,7 +14,7 @@ function Show() {
 
     return(
         <main>
-            {showData ? <DataTitle data={showData}/> : 'loading'}
+            {showData ? <DataTitle data={showData}/> : <Preloader/>}
         </main>
     )
 }

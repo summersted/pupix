@@ -11,9 +11,10 @@ import LogIn from '../../autorization/log-in';
 import SignIn from '../../autorization/sign-in';
 import Profile from '../PageNotFound';
 import PageNotFound from '../PageNotFound';
-import Show from '../show/show';
-import Seasons from '../seasons/seasons';
-import Episodes from '../episodes/episodes';
+import Show from '../show';
+import Seasons from '../seasons/';
+import Episodes from '../episodes';
+import Search from '../search';
 
 function App() {
     return (
@@ -29,8 +30,9 @@ function App() {
                 <Route path="/shows/:id" component={Show}/>
                 <Route path="/shows" component={Homepage} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/search" component={Search} />
                 <Route component={PageNotFound} />
-                {/* <Route path="/search" component={Search} /> */}
+                
 
             </Switch>
         </Router>

@@ -1,12 +1,15 @@
 import { Row, Col, Accordion, Image } from "react-bootstrap";
+import Preloader from "../preloader";
 function EpisodesList({ episodesList, show }) {
     return (
         <>
             <Row>
-                <Col>
-                    {show ? (<Image src={show.image.original} rounded />) : 'loading...'}
+                <Col xs={4}>
+                    <div className="img-wrapper">
+                        {show ? (<Image src={show.image.original} rounded />) : <Preloader />}
+                    </div>
                 </Col>
-                <Col>
+                <Col xs={6}>
                     {episodesList ? (
                         <Accordion>
 
@@ -33,8 +36,7 @@ function EpisodesList({ episodesList, show }) {
                             })}
 
                         </Accordion>
-                    ) : 'loading...'}
-
+                    ) : <Preloader />}
                 </Col>
             </Row>
         </>
