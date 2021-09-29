@@ -1,4 +1,4 @@
-import { Pagination, Row, Col } from "react-bootstrap";
+import { Pagination } from "react-bootstrap";
 function CustomPagination({ postsPerPage, totalPosts, paginate, active }) {
     let items = [];
     for (let number = 1; number <= Math.ceil(totalPosts / postsPerPage); number++) {
