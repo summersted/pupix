@@ -37,7 +37,11 @@ function DataTitle({ data }) {
                                 <Button variant="outline-dark">Show seasons</Button>
                             </LinkContainer>
                             <LinkContainer to={`/shows/${data.id}/episodes`}>
-                                <Button variant="outline-dark">Show episodes</Button>
+                                <Button
+                                    variant="outline-dark"
+                                    className="ms-4">
+                                    Show episodes
+                                </Button>
                             </LinkContainer>
                         </Alert>
                     </Col>
