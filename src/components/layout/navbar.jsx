@@ -3,24 +3,23 @@ import { useState } from 'react';
 import { Navbar, Nav, Container, Button, ButtonGroup } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth } from '../autorization/contexts/authContexts';
-import { AuthProvider } from '../autorization/contexts/authContexts';
 
 export default function NavMenu() {
 
-    const { currentUser } = useAuth();
+    const { currentUser, logOut} = useAuth();
 
-    // const [error, setError] = useState();
-    // const handleLogOut = async (e) => {
-    //     e.preventDefault();
+    const [error, setError] = useState();
+    const handleLogOut = async (e) => {
+        e.preventDefault();
+        try {
+            setError('');
+            await logOut();
+        } catch (err) {
+            setError("Failed to log out");
+            throw error;
+        }
+    };
 
-    //     try {
-    //         setError('');
-    //         await logOut();
-    //     } catch (err) {
-    //         setError("Failed to log out");
-    //         throw err;
-    //     }
-    // };
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -46,7 +45,7 @@ export default function NavMenu() {
                                     <Button variant="secondary">My profile</Button>
                                 </LinkContainer>
                                 {/* onclick listener must be here */}
-                                <Button variant="outline-secondary">Log out</Button>
+                                <Button variant="outline-secondary" onClick={handleLogOut}>Log out</Button>
                             </ButtonGroup>
 
                         ) : (
