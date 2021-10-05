@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import NavMenu from '../../layout/navbar';
 // import Footer from './components/layout/footer';
-import Homepage from '../homepage';
+import Features from '../features';
 import LogIn from '../../autorization/log-in';
 import SignIn from '../../autorization/sign-in';
 import Profile from '../profile';
@@ -15,6 +15,7 @@ import Show from '../show';
 import Seasons from '../seasons/';
 import Episodes from '../episodes';
 import Search from '../search';
+import Homepage from '../homepage';
 import { AuthProvider } from '../../autorization/contexts/authContexts';
 import SaveUserData from '../../autorization/sign-in/saveuserdata';
 
@@ -32,7 +33,7 @@ function App() {
                     <Route path="/shows/:id/seasons" component={Seasons} />
                     <Route path="/shows/:id/episodes" component={Episodes} />
                     <Route path="/shows/:id" component={Show} />
-                    <Route path="/shows" component={Homepage} />
+                    <Route path="/shows" component={Features} />
                     <Route path="/search" component={Search} />
                     <Route component={PageNotFound} />
                 </Switch>

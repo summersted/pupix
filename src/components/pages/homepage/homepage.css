@@ -1,8 +1,9 @@
-.carousel {
-    width: 600px;
-    height: 400px;
+.carousel{
+    height: auto;
 }
-
-.carousel-item>img {
-    border-radius: 10px;
+#h2-greeting{
+    font-size: 80px;
+}
+#homepage-describe{
+    font-size: 40px;
 }

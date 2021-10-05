@@ -13,6 +13,7 @@ main {
     max-width: 1320px;
     margin: 0 auto;
     height: 100%;
+    margin-bottom: 100px;
 }
 img{
     max-height: 100%;
