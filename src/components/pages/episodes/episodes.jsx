@@ -18,19 +18,20 @@ function Episodes() {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = episodes.slice(indexOfFirstPost, indexOfLastPost);
-  
+
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
     return (
         <main>
             {episodes ? (
                 <>
-                    <EpisodesList episodesList={currentPosts} show={show} />
                     <CustomPagination
                         postsPerPage={postsPerPage}
                         totalPosts={episodes.length}
                         paginate={paginate}
                         active={currentPage} />
+                    <EpisodesList episodesList={currentPosts} show={show} />
+
                 </>
             ) : <Preloader />}
         </main>

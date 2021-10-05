@@ -20,6 +20,16 @@ export const getShowbyId = async (id) => {
     }
 }
 
+export const getHumanbyId = async (id) => {
+    try {
+        const res = await fetch(`${__base_url}people/${id}`)
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getSeasons = async (id) => {
     try {
         const res = await fetch(`${__base_url}shows/${id}/seasons`)

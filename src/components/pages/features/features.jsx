@@ -4,6 +4,7 @@ import './features.css';
 import { getShows } from '../../services';
 import List from '../List';
 import CustomPagination from '../customPagination/pagination';
+import { Row } from 'react-bootstrap';
 
 const Features = () => {
 
@@ -22,12 +23,16 @@ const Features = () => {
 
   return (
     <main className="flex">
-      <List moviesList={currentPosts} />
-      <CustomPagination
-        postsPerPage={postsPerPage}
-        totalPosts={data.length}
-        paginate={paginate}
-        active={currentPage} />
+      <Row>
+        <List moviesList={currentPosts} />
+      </Row>
+      <Row className="pagination-row">
+        <CustomPagination
+          postsPerPage={postsPerPage}
+          totalPosts={data.length}
+          paginate={paginate}
+          active={currentPage} />
+      </Row>
     </main>
   );
 }

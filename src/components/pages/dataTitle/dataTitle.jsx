@@ -8,7 +8,6 @@ function DataTitle({ data }) {
     
     const genresList = useCallback((ganresArray) => ganresArray.join(', '), []);
 
-    
 
     return (
         <>

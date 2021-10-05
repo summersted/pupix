@@ -18,6 +18,7 @@ import Search from '../search';
 import Homepage from '../homepage';
 import { AuthProvider } from '../../autorization/contexts/authContexts';
 import SaveUserData from '../../autorization/sign-in/saveuserdata';
+import HumanProfile from '../humanProfile';
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/shows/:id/seasons" component={Seasons} />
                     <Route path="/shows/:id/episodes" component={Episodes} />
                     <Route path="/shows/:id" component={Show} />
+                    <Route path="/people/:id" component={HumanProfile} />
                     <Route path="/shows" component={Features} />
                     <Route path="/search" component={Search} />
                     <Route component={PageNotFound} />

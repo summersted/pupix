@@ -6,3 +6,6 @@
 .carousel-item>img {
     border-radius: 10px;
 }
+.pagination{
+    justify-content: center;
+}

@@ -22,8 +22,6 @@ function PeopleList({ list }) {
                                                 <Card.Title>{item?.name}</Card.Title>
                                                 <Card.Text><b>Gender:</b> {item?.gender}</Card.Text>
                                                 <Card.Text><b>Country:</b> {item?.country?.name}</Card.Text>
-                                                <Card.Text><b>Birthday</b> {item?.birthday}</Card.Text>
-                                                <Card.Text><b>Deathday:</b> {item?.deathday ? item?.deathday : '-'}</Card.Text>
                                                 <LinkContainer to={`/people/${item?.id}`}>
                                                     <Button variant="primary">Watch profile</Button>
                                                 </LinkContainer>
