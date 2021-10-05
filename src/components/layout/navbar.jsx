@@ -1,19 +1,20 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { Navbar, Nav, Container, Button, ButtonGroup } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth } from '../autorization/contexts/authContexts';
 
 export default function NavMenu() {
 
     const { currentUser, logOut} = useAuth();
-
+    const history = useHistory();
     const [error, setError] = useState();
     const handleLogOut = async (e) => {
         e.preventDefault();
         try {
             setError('');
             await logOut();
+            history.push('/login');
         } catch (err) {
             setError("Failed to log out");
             throw error;

@@ -3,7 +3,8 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../contexts/authContexts'
 import { useHistory } from 'react-router';
-import Preloader from'../../pages/preloader';
+import Preloader from '../../pages/preloader';
+
 
 export default function SignIn() {
 
@@ -29,7 +30,7 @@ export default function SignIn() {
             setLoading(true);
             await signUp(emailRef.current.value, passwordRef.current.value);
             setLoading(false);
-            history.push("/");
+            history.push("/redirect");
         } catch (err) {
             setError("Failed to create an account");
             setLoading(false);
@@ -91,7 +92,7 @@ export default function SignIn() {
         );
     } else {
         return (
-            <Preloader/>
+            <Preloader />
         )
     }
 }

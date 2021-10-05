@@ -1,10 +1,15 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Image, Row, Container, Col, Alert, Button } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+
+
+import DataTitleButtons from "../dataTitleButtons/dataTitleButtons";
 
 function DataTitle({ data }) {
+    
     const genresList = useCallback((ganresArray) => ganresArray.join(', '), []);
-    console.log(data);
+
+    
+
     return (
         <>
             <Container fluid>
@@ -33,16 +38,7 @@ function DataTitle({ data }) {
                                 Genres: {genresList(data.genres)}
                             </p>
                             <hr />
-                            <LinkContainer to={`/shows/${data.id}/seasons`}>
-                                <Button variant="outline-dark">Show seasons</Button>
-                            </LinkContainer>
-                            <LinkContainer to={`/shows/${data.id}/episodes`}>
-                                <Button
-                                    variant="outline-dark"
-                                    className="ms-4">
-                                    Show episodes
-                                </Button>
-                            </LinkContainer>
+                            <DataTitleButtons showId={data.id}/>
                         </Alert>
                     </Col>
                 </Row>

@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/authContexts'
 import { useHistory } from 'react-router';
 import Preloader from'../../pages/preloader';
 
+
 export default function LogIn() {
 
     const [loaded, setLoaded] = useState(false);
@@ -15,6 +16,10 @@ export default function LogIn() {
     const history = useHistory();
 
     const { logIn } = useAuth();
+
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

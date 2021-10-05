@@ -9,13 +9,14 @@ import NavMenu from '../../layout/navbar';
 import Homepage from '../homepage';
 import LogIn from '../../autorization/log-in';
 import SignIn from '../../autorization/sign-in';
-import Profile from '../PageNotFound';
+import Profile from '../profile';
 import PageNotFound from '../PageNotFound';
 import Show from '../show';
 import Seasons from '../seasons/';
 import Episodes from '../episodes';
 import Search from '../search';
 import { AuthProvider } from '../../autorization/contexts/authContexts';
+import SaveUserData from '../../autorization/sign-in/saveuserdata';
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                     <Route exact path="/" component={Homepage} />
                     <Route path="/login" component={LogIn} />
                     <Route path="/signin" component={SignIn} />
+                    <Route path="/redirect" component={SaveUserData} />
                     <Route path="/profile" component={Profile} />
                     <Route path="/shows/:id/seasons" component={Seasons} />
                     <Route path="/shows/:id/episodes" component={Episodes} />

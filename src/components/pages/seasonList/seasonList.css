@@ -10,7 +10,7 @@ ul.nav-tabs{
     background-color: rgba(219, 219, 219, 0.5);
 }
 .tab-content{
-    padding: 5px 0 0 5px;
+    padding: 5px 0 10px 5px;
     border-radius: 0 0 5px 5px;
     background-color: rgba(219, 219, 219, 0.5);
 }

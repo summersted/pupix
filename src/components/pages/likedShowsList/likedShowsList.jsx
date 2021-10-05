@@ -1,25 +1,34 @@
+import { useEffect, useState } from "react";
 import React, { useCallback } from 'react';
 import { Card, Button, Container, Col, Row } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import Preloader from '../preloader';
-import './List.css';
-function List({ moviesList }) {
-    console.log(moviesList);
+import { getShowbyId } from '../../services';
+import { LinkContainer } from "react-router-bootstrap";
+import Preloader from "../preloader";
+
+function LikedShowsList({ showsList }) {
+    const [showsData, setShowsData] = useState([])
     const genresList = useCallback((ganresArray) => ganresArray.join(', '), []);
+
+    useEffect(() => {
+        showsList.forEach(item => {
+            getShowbyId(item)
+                .then(res => setShowsData(oldarray => [...oldarray, res]));
+        })
+    }, [showsList])
 
     return (
         <>
-            {moviesList ? (
+            {showsData ? (
                 <Container>
                     <Row>
-                        {moviesList.map((item, i) => {
+                        {showsData.map((item, i) => {
                             return (
                                 <React.Fragment key={`${item?.id}`}>
-                                    <Col xs={1} md={3}>
-                                        <Card bg="dark" text="light">
+                                    <Col xs={6} md={6}>
+                                        <Card bg="dark" text="light" className="horizontal-card">
                                             <div className="img-wrapper-medium">
-                                                {item?.image ? <Card.Img variant="top" src={item?.image?.medium} /> : 
-                                                <div className="img-no-photo">No photo</div> }
+                                                {item?.image ? <Card.Img variant="top" src={item?.image?.medium} /> :
+                                                    <div className="img-no-photo">No photo</div>}
                                             </div>
                                             <Card.Body>
                                                 <Card.Title>{item?.name}</Card.Title>
@@ -32,7 +41,7 @@ function List({ moviesList }) {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    {(i % 4 === 3) ? <div className="separator"></div> : null}
+                                    {(i % 2 === 1) ? <div className="separator"></div> : null}
                                 </React.Fragment>
                             )
                         })}
@@ -42,5 +51,4 @@ function List({ moviesList }) {
         </>
     )
 }
-
-export default List;
+export default LikedShowsList;

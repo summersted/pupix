@@ -1,11 +1,12 @@
 import { initializeApp } from "firebase/app";
+import {getFirestore} from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateEmail,
-  updatePassword,
+  updatePassword
 } from "firebase/auth";
 
 const firebaseApp = initializeApp({
@@ -23,4 +24,5 @@ export const signInUser = signInWithEmailAndPassword;
 export const resetPassword = sendPasswordResetEmail;
 export const changeEmail = updateEmail;
 export const changePassword = updatePassword;
+export const db = getFirestore();
 export default firebaseApp;

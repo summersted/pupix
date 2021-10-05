@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     logOut,
     resetUserPassword,
     updateEmail,
-    updatePassword,
+    updatePassword
   };
 
   return (

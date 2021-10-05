@@ -7,3 +7,8 @@
 .vertical-separator{
     width: 50px;
 }
+.horizontal-card{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+}
