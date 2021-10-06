@@ -12,6 +12,7 @@ function SaveUserData() {
     const addUserData = async (uid) => {
         try {
             await setDoc(doc(db, "users", uid), {
+                LikedShowsIDs: [],
                 name: 'no username'
             });
         } catch (e) {

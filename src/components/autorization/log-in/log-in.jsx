@@ -45,7 +45,7 @@ export default function LogIn() {
             <main>
                 <Card style={{ maxWidth: "400px" }}>
                     <Card.Body>
-                        <h2 className="text-center mb-4">Sign up</h2>
+                        <h2 className="text-center mb-4">Log in</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <Form onSubmit={handleSubmit}>
                             <Form.Group

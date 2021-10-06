@@ -55,7 +55,7 @@ export default function NavMenu() {
                                     <Button variant="secondary">log in</Button>
                                 </LinkContainer>
                                 <LinkContainer to="/signin">
-                                    <Button variant="outline-secondary">sign in</Button>
+                                    <Button variant="outline-secondary">sign up</Button>
                                 </LinkContainer>
                             </ButtonGroup>
                         )}
