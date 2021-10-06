@@ -49,6 +49,8 @@ function Profile() {
                 <div className="vertical-separator"></div>
                 <div className="wrapper-list">
                     <h2>{userObject?.name}</h2>
+                    <hr />
+                    <h2>{currentUser ? currentUser?.email : ''}</h2>
                     <Tabs
                         id="controlled-tab-example"
                         activeKey={key}

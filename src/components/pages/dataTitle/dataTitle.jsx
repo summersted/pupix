@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { Image, Row, Container, Col, Alert, Button } from "react-bootstrap";
+import { useCallback } from "react";
+import { Image, Row, Container, Col, Alert } from "react-bootstrap";
 
 
 import DataTitleButtons from "../dataTitleButtons/dataTitleButtons";
