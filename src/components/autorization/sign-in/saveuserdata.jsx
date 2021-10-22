@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 function SaveUserData() {
     const history = useHistory();
     const { currentUser } = useAuth();
-
+    //here nothing to fix
     const addUserData = async (uid) => {
         try {
             await setDoc(doc(db, "users", uid), {
@@ -29,5 +29,4 @@ function SaveUserData() {
         <Preloader />
     )
 }
-
 export default SaveUserData;
