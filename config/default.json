@@ -1,0 +1,6 @@
+{
+    "port": 8081,
+    "hoursInMs": 216000,
+    "jwtSecret": "biuA1agA6We9FS8r",
+    "mongoUri": "mongodb+srv://summersted:qZFPZQznC6@userscluster.1hyv1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
