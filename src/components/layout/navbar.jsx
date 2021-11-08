@@ -1,25 +1,8 @@
-import { useState } from 'react';
 import { Navbar, Nav, Container, Button, ButtonGroup } from 'react-bootstrap';
-import { useHistory } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useAuth } from '../autorization/contexts/authContexts';
 
 export default function NavMenu() {
 
-    const { currentUser, logOut} = useAuth();
-    const history = useHistory();
-    const [error, setError] = useState();
-    const handleLogOut = async (e) => {
-        e.preventDefault();
-        try {
-            setError('');
-            await logOut();
-            history.push('/login');
-        } catch (err) {
-            setError("Failed to log out");
-            throw error;
-        }
-    };
 
     return (
         <>
@@ -39,17 +22,6 @@ export default function NavMenu() {
                                 <Nav.Link href="#pricing">Search</Nav.Link>
                             </LinkContainer>
                         </Nav>
-                        {currentUser ? (
-                            <ButtonGroup aria-label="Basic example">
-                                {/* this page doesn`t work */}
-                                <LinkContainer to="/profile">
-                                    <Button variant="secondary">My profile</Button>
-                                </LinkContainer>
-                                {/* onclick listener must be here */}
-                                <Button variant="outline-secondary" onClick={handleLogOut}>Log out</Button>
-                            </ButtonGroup>
-
-                        ) : (
                             <ButtonGroup aria-label="Basic example">
                                 <LinkContainer to="/login">
                                     <Button variant="secondary">log in</Button>
@@ -58,8 +30,6 @@ export default function NavMenu() {
                                     <Button variant="outline-secondary">sign up</Button>
                                 </LinkContainer>
                             </ButtonGroup>
-                        )}
-
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

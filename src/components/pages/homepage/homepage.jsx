@@ -30,6 +30,7 @@ function Homepage() {
                                         className="d-block w-100"
                                         src={item ? item.image.original :
                                             <div className="img-no-photo">No photo</div>}
+                                        alt="carousel"
                                     />
                                     <Carousel.Caption>
                                         <h3 >{item.name}</h3>

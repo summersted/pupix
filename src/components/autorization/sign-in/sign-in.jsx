@@ -1,7 +1,6 @@
 import '../auth.css';
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import React, { useState, useRef, useEffect } from 'react';
-import { useAuth } from '../contexts/authContexts'
 import { useHistory } from 'react-router';
 import Preloader from '../../pages/preloader';
 
@@ -15,8 +14,6 @@ export default function SignIn() {
     const [loading, setLoading] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const history = useHistory();
-
-    const { signUp } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
