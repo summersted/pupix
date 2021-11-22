@@ -1,19 +1,21 @@
 //exports we need
+const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const express = require('express');
+
 const config = require('config');
 const mongoose = require('mongoose');
+
 const app = express();
 
-// getting PORT from config file 
 const PORT = config.get('port') || 5000;
+
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(cors());
-
+//connect auth and update user data router
 app.use('/api/auth', require('./routes/auth.routes'));
-
+app.use('/api/update', require('./routes/updateData.routes'));
 /* 
 {
      email: 'test@test.com',

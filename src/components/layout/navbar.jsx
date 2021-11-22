@@ -1,9 +1,8 @@
-import { Navbar, Nav, Container, Button, ButtonGroup } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
-export default function NavMenu() {
-
-
+import useAuthButtons from './useAuthButtons';
+export default function NavMenu({isAuthenticated}) {
+    const authButtons = useAuthButtons(isAuthenticated);
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -22,14 +21,7 @@ export default function NavMenu() {
                                 <Nav.Link href="#pricing">Search</Nav.Link>
                             </LinkContainer>
                         </Nav>
-                            <ButtonGroup aria-label="Basic example">
-                                <LinkContainer to="/login">
-                                    <Button variant="secondary">log in</Button>
-                                </LinkContainer>
-                                <LinkContainer to="/signin">
-                                    <Button variant="outline-secondary">sign up</Button>
-                                </LinkContainer>
-                            </ButtonGroup>
+                            {authButtons}
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

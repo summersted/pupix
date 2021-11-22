@@ -1,4 +1,6 @@
 const __base_url = 'https://api.tvmaze.com/';
+const _mongoAuthAPi_ = '/api/auth';
+const _mongoLikedShowsAPi_ = '/api/update';
 
 export const getShows = async (page) => {
     try {
@@ -67,3 +69,91 @@ export const getPeople = async (querry) => {
         console.log(error);
     }
 }
+
+export const loginQuerry = async (body) => {
+    try {
+        const res = await fetch(`${_mongoAuthAPi_}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const registerQuerry = async (body) => {
+    try {
+        const res = await fetch(`${_mongoAuthAPi_}/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const getLikedShows = async (body) => {
+    try {
+        const res = await fetch(`${_mongoLikedShowsAPi_}/likedShowsId`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+    }
+}
+export const addLikedshowId = async (body, id) => {
+    try {
+        const res = await fetch(`${_mongoLikedShowsAPi_}/add/likedShowsId:${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+    }
+}
+export const delLikedshowId = async (body,id) => {
+    try {
+        const res = await fetch(`${_mongoLikedShowsAPi_}/del/likedShowsId:${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+    }
+}
+export const getUserData = async (body) => {
+    try {
+        const res = await fetch(`${_mongoAuthAPi_}/user`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(val => val.json())
+        return res;
+    } catch (error) {
+    }
+}
+

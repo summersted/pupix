@@ -1,38 +1,50 @@
 import '../auth.css';
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import Preloader from '../../pages/preloader';
+import { AuthContext } from '../../../context/authContext';
+import { loginQuerry } from '../../services/service';
 import { useHistory } from 'react-router';
-import Preloader from'../../pages/preloader';
-
 
 export default function LogIn() {
-
-    const [loaded, setLoaded] = useState(false);
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const auth = useContext(AuthContext);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [loaded, setLoaded] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
         try {
-            setError("");
             setLoading(true);
-            await logIn(emailRef.current.value, passwordRef.current.value);
-            setLoading(false);
-            history.push("/");
-        } catch (err) {
-            setError("Failed to log in");
-            setLoading(false);
-            // throw err;
-        }
-    };
+            await loginQuerry({
+                email,
+                password
+            }).then(res => {
+                setData(res);
+                setLoading(false);
+                console.log(res);
+                if (!res?.ok) {
+                    setError(res?.message)
+                    return
+                }
+                auth.login(res.token, res.userId);
+                history.push('/');
+            });
 
+           
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+
+    };
     useEffect(() => {
         setLoaded(true);
-    }, []);
+    }, [loaded]);
+
     if (loaded) {
         return (
             <main>
@@ -40,7 +52,7 @@ export default function LogIn() {
                     <Card.Body>
                         <h2 className="text-center mb-4">Log in</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
-                        <Form onSubmit={handleSubmit}>
+                        <Form>
                             <Form.Group
                                 className="mb-3"
                                 controlId="email">
@@ -48,7 +60,8 @@ export default function LogIn() {
                                 <Form.Control
                                     type="email"
                                     placeholder="Enter email"
-                                    ref={emailRef} />
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)} />
                             </Form.Group>
 
                             <Form.Group
@@ -58,13 +71,15 @@ export default function LogIn() {
                                 <Form.Control
                                     type="password"
                                     placeholder="Password"
-                                    ref={passwordRef} />
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)} />
                             </Form.Group>
 
                             <Button
                                 variant="primary"
-                                type="submit"
-                                disabled={loading}>
+                                type="button"
+                                disabled={loading}
+                                onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </Form>
@@ -74,7 +89,7 @@ export default function LogIn() {
         );
     } else {
         return (
-            <Preloader/>
+            <Preloader />
         )
     }
 }

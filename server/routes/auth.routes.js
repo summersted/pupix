@@ -19,7 +19,7 @@ router.post('/register',
             if (!validationErrors.isEmpty()) {
                 return res.status(400).json({
                     errors: validationErrors.array(),
-                    massage: 'Incorrect register data.'
+                    message: 'Incorrect register data.'
                 })
             }
 
@@ -28,7 +28,7 @@ router.post('/register',
             const candidate = await User.findOne({ email });
             //return error massege if email isn`t uniq
             if (candidate) {
-                return res.status(400).json({ message: 'User with same email exist.' });
+                return res.status(400).json({ ok: false, message: 'User with same email exist.' });
             }
             //encypting user password
             const hashedPassword = await bcrypt.hash(password, 12);
@@ -37,11 +37,12 @@ router.post('/register',
 
             await user.save();
 
-            return res.status(200).json({ massage: 'User successfully created.' })
+            return res.status(200).json({ ok: true, message: 'User successfully created.' })
         } catch (error) {
             return res.status(500).json(
                 {
-                    massage: 'Something went wrong, please try again.'
+                    ok: false,
+                    message: 'Something went wrong, please try again.'
                 });
         }
     });
@@ -59,7 +60,8 @@ router.post('/login',
             if (!validationErrors.isEmpty()) {
                 return res.status(400).json({
                     errors: validationErrors.array(),
-                    massage: 'Incorrect data.'
+                    ok: false,
+                    message: 'Incorrect data.'
                 })
             }
             const { email, password } = req.body;
@@ -67,7 +69,7 @@ router.post('/login',
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res.status(400).json({ massage: 'User with this email doesn`t exist' })
+                return res.status(400).json({ ok: false, message: 'User with this email doesn`t exist' })
             }
             const isMatch = await bcrypt.compare(password, user.password);
             if (isMatch) {
@@ -76,13 +78,29 @@ router.post('/login',
                     config.jwtSecret,
                     { expiresIn: '1h' }
                 )
-                const expiresDate = new Date().getTime()+config.hoursInMs;
-                return res.status(200).json({ token: token, userId: user.id , expiresDate });
+                const expiresDate = new Date().getTime() + config.hoursInMs;
+                return res.status(200).json({ ok: true, token: token, userId: user.id, expiresDate });
             }
-            
+
         } catch (error) {
-            return res.status(500).json({ massage: error.message });
+            return res.status(500).json({ ok: false, message: error.message });
         }
     });
-    
+
+router.post('/user', async (req, res) => {
+    try {
+        const { _id } = req.body;
+        try {
+            // try to find user with that id
+            const userData = await User.findOne({ _id });
+            const UserDataObject = JSON.parse(JSON.stringify(userData));
+            return res.status(200).json({ ok: true, user: UserDataObject });
+        } catch (error) {
+            return res.status(400).json({ ok: false, message: 'Can`t find user with that user id.' });
+        }
+    } catch (error) {
+        return res.status(500).json({ ok: false, message: error.message });
+    }
+})
+
 module.exports = router;

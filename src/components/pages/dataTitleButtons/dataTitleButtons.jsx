@@ -1,9 +1,10 @@
 import { LinkContainer } from "react-router-bootstrap";
 // import {  useState } from "react";
 import { Button } from "react-bootstrap";
+import DataTitleLikeButton from "../dataTitleLikeButton";
 
 function DataTitleButtons({ showId }) {
-
+    
     return (
         <>
             <>
@@ -17,6 +18,7 @@ function DataTitleButtons({ showId }) {
                         Show episodes
                     </Button>
                 </LinkContainer>
+                <DataTitleLikeButton showId={showId}/>
             </>
         </>
     )

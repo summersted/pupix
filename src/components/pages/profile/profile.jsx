@@ -1,12 +1,21 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container, Image, Tabs, Tab, InputGroup, Button, FormControl } from "react-bootstrap";
 import './profile.css';
-// import LikedShowsList from "../likedShowsList";
+import LikedShowsList from "../likedShowsList";
+import { getLikedShows, getUserData } from "../../services";
 
-function Profile() {
+function Profile({isAuthenticated}) {
+    const _id = JSON.parse(localStorage.getItem('userData')).userId;
+    const [likedShowsObject, setLikedShowsObject] = useState(null);
+    const [userData, setUserData] = useState(null);
+
     const [key, setKey] = useState('info');
     const nameRef = useRef();
 
+    useEffect(() => {
+        getLikedShows({ _id }).then(res => setLikedShowsObject(res));
+        getUserData({_id}).then(res => setUserData(res));
+    }, []);
     return (
         <>
             <Container fluid="sm">
@@ -15,9 +24,7 @@ function Profile() {
                 </div>
                 <div className="vertical-separator"></div>
                 <div className="wrapper-list">
-                    <h2>test</h2>
-                    <hr />
-                    <h2>test</h2>
+                    <h2>{userData?.user?.email}</h2>
                     <Tabs
                         id="controlled-tab-example"
                         activeKey={key}
@@ -35,7 +42,9 @@ function Profile() {
                             </InputGroup>
                         </Tab>
                         <Tab eventKey="Liked" title="Liked">
-                            {/* <LikedShowsList/> */}
+                        {likedShowsObject ? (
+                                <LikedShowsList showsList={likedShowsObject.likedShowsId} />
+                            ) : 'loading'}
                         </Tab>
                     </Tabs>
                 </div>

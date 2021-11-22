@@ -1,34 +1,58 @@
 import '../auth.css';
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Preloader from '../../pages/preloader';
+import { registerQuerry } from '../../services';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/authContext';
 
 
 export default function SignIn() {
-
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
-    const [error, setError] = useState("");
+    const history = useHistory();
+    const auth = useContext(AuthContext);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [passwordConfirm, setPasswordConfirm] = useState(null);
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [loaded, setLoaded] = useState(false);
-    const history = useHistory();
+    const [data, setData] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null)
+
+    const changeState = (stateName, newValue) => {
+        stateName(newValue);
+        setError('');
+    }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
 
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+        if (password !== passwordConfirm) {
             return setError("Passwords do not match");
         }
-
+        if (email === null && password === null) {
+            return setError("Enter your email and password");
+        }
         try {
-            setError('');
             setLoading(true);
-            await signUp(emailRef.current.value, passwordRef.current.value);
+            const dataPromise = registerQuerry({
+                email,
+                password
+            });
+            await dataPromise.then(res => setData(res));
             setLoading(false);
-            history.push("/redirect");
+            console.log(data);
+            if (data && !data.ok) {
+                setSuccessMessage("");
+                setError(data.message);
+            }
+            if (data && data.ok) {
+                setSuccessMessage(data.message);
+            }
+            auth.login(data.token, data.userId);
+            history.push('/');
         } catch (err) {
+            console.log(err);
             setError("Failed to create an account");
             setLoading(false);
             throw err;
@@ -46,7 +70,8 @@ export default function SignIn() {
                     <Card.Body>
                         <h2 className="text-center mb-4">Sign up</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
-                        <Form onSubmit={handleSubmit}>
+                        {successMessage && <Alert variant="success">{successMessage}</Alert>}
+                        <Form>
                             <Form.Group
                                 className="mb-3"
                                 controlId="email">
@@ -54,7 +79,8 @@ export default function SignIn() {
                                 <Form.Control
                                     type="email"
                                     placeholder="Enter email"
-                                    ref={emailRef} />
+                                    value={email}
+                                    onChange={(e) => changeState(setEmail, e.target.value)} />
                             </Form.Group>
 
                             <Form.Group
@@ -64,7 +90,8 @@ export default function SignIn() {
                                 <Form.Control
                                     type="password"
                                     placeholder="Password"
-                                    ref={passwordRef} />
+                                    value={password}
+                                    onChange={(e) => changeState(setPassword, e.target.value)} />
                             </Form.Group>
 
                             <Form.Group
@@ -74,12 +101,14 @@ export default function SignIn() {
                                 <Form.Control
                                     type="password"
                                     placeholder="confirm password"
-                                    ref={passwordConfirmRef} />
+                                    value={passwordConfirm}
+                                    onChange={(e) => setPasswordConfirm(e.target.value)} />
                             </Form.Group>
                             <Button
                                 variant="primary"
-                                type="submit"
-                                disabled={loading}>
+                                type="button"
+                                disabled={loading}
+                                onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </Form>
