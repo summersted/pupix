@@ -2,7 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 import { useAuth } from '../../../hooks/auth.hook';
 import { AuthContext } from '../../../context/authContext';
@@ -39,7 +40,9 @@ function App() {
                     {isAuthenticated ? (
                         <Route path="/profile" component={Profile} />
                     ) : (
-                        <Route path="/profile" component={LogIn} />
+                        <Route path="/profile"> 
+                        <Redirect to="/login" />
+                        </Route>
                     )}
                     <Route path="/shows/:id/seasons" component={Seasons} />
                     <Route path="/shows/:id/episodes" component={Episodes} />

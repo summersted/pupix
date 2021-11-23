@@ -12,3 +12,7 @@
     flex-direction: row;
     width: 400px;
 }
+.wrapper-list input::placeholder {
+    font-size: 13px;
+    font-style: italic;
+  }

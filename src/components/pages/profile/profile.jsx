@@ -10,7 +10,6 @@ function Profile({isAuthenticated}) {
     const [userData, setUserData] = useState(null);
 
     const [key, setKey] = useState('info');
-    const nameRef = useRef();
 
     useEffect(() => {
         getLikedShows({ _id }).then(res => setLikedShowsObject(res));
@@ -33,12 +32,13 @@ function Profile({isAuthenticated}) {
                     >
                         <Tab eventKey="info" title="Information">
                             <InputGroup className="mb-3">
-                                <InputGroup.Text id="basic-addon1">Your username: </InputGroup.Text>
+                                <InputGroup.Text id="basic-addon1">username: </InputGroup.Text>
                                 <FormControl
                                     aria-label="Small"
                                     aria-describedby="inputGroup-sizing-sm"
-                                    ref={nameRef} />
-                                <Button>Change</Button>
+                                    placeholder="this feature is not yet supported"
+                                    />
+                                <Button disabled="true" >Change</Button>
                             </InputGroup>
                         </Tab>
                         <Tab eventKey="Liked" title="Liked">
