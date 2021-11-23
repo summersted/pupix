@@ -15,7 +15,6 @@ router.post('/register',
         try {
             //validate user data
             const validationErrors = validationResult(req);
-            console.log(req);
             if (!validationErrors.isEmpty()) {
                 return res.status(400).json({
                     errors: validationErrors.array(),
@@ -37,7 +36,14 @@ router.post('/register',
 
             await user.save();
 
-            return res.status(200).json({ ok: true, message: 'User successfully created.' })
+            const token = jwt.sign(
+                { userId: user.id },
+                config.jwtSecret,
+                { expiresIn: '1h' }
+            )
+
+            const expiresDate = new Date().getTime() + config.hoursInMs;
+            return res.status(200).json({ ok: true, token: token, userId: user.id, expiresDate });
         } catch (error) {
             return res.status(500).json(
                 {

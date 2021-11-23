@@ -35,22 +35,19 @@ export default function SignIn() {
         }
         try {
             setLoading(true);
-            const dataPromise = registerQuerry({
+            await registerQuerry({
                 email,
                 password
+            }).then(res => {
+                setLoading(false);
+                if (res && !res.ok) {
+                    setSuccessMessage("");
+                    setError(res.message);
+                }
+                console.log(res);
+                auth.login(res.token, res.userId);
+                history.push('/');
             });
-            await dataPromise.then(res => setData(res));
-            setLoading(false);
-            console.log(data);
-            if (data && !data.ok) {
-                setSuccessMessage("");
-                setError(data.message);
-            }
-            if (data && data.ok) {
-                setSuccessMessage(data.message);
-            }
-            auth.login(data.token, data.userId);
-            history.push('/');
         } catch (err) {
             console.log(err);
             setError("Failed to create an account");

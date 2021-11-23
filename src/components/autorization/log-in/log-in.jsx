@@ -25,7 +25,6 @@ export default function LogIn() {
             }).then(res => {
                 setData(res);
                 setLoading(false);
-                console.log(res);
                 if (!res?.ok) {
                     setError(res?.message)
                     return

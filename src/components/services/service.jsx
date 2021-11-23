@@ -1,4 +1,5 @@
 const __base_url = 'https://api.tvmaze.com/';
+const _herokuUrl_ = 'https://pupix-server.herokuapp.com';
 const _mongoAuthAPi_ = '/api/auth';
 const _mongoLikedShowsAPi_ = '/api/update';
 
@@ -72,7 +73,7 @@ export const getPeople = async (querry) => {
 
 export const loginQuerry = async (body) => {
     try {
-        const res = await fetch(`${_mongoAuthAPi_}/login`, {
+        const res = await fetch(`${_herokuUrl_}${_mongoAuthAPi_}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ export const loginQuerry = async (body) => {
 }
 export const registerQuerry = async (body) => {
     try {
-        const res = await fetch(`${_mongoAuthAPi_}/register`, {
+        const res = await fetch(`${_herokuUrl_}${_mongoAuthAPi_}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,7 +103,7 @@ export const registerQuerry = async (body) => {
 }
 export const getLikedShows = async (body) => {
     try {
-        const res = await fetch(`${_mongoLikedShowsAPi_}/likedShowsId`, {
+        const res = await fetch(`${_herokuUrl_}${_mongoLikedShowsAPi_}/likedShowsId`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +117,7 @@ export const getLikedShows = async (body) => {
 }
 export const addLikedshowId = async (body, id) => {
     try {
-        const res = await fetch(`${_mongoLikedShowsAPi_}/add/likedShowsId:${id}`, {
+        const res = await fetch(`${_herokuUrl_}${_mongoLikedShowsAPi_}/add/likedShowsId:${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -130,7 +131,7 @@ export const addLikedshowId = async (body, id) => {
 }
 export const delLikedshowId = async (body,id) => {
     try {
-        const res = await fetch(`${_mongoLikedShowsAPi_}/del/likedShowsId:${id}`, {
+        const res = await fetch(`${_herokuUrl_}${_mongoLikedShowsAPi_}/del/likedShowsId:${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -144,7 +145,7 @@ export const delLikedshowId = async (body,id) => {
 }
 export const getUserData = async (body) => {
     try {
-        const res = await fetch(`${_mongoAuthAPi_}/user`, {
+        const res = await fetch(`${_herokuUrl_}${_mongoAuthAPi_}/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
