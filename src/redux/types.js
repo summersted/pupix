@@ -1,0 +1,4 @@
+export const GET_MOVIES_DATA = 'GET_MOVIES_DATA';
+export const SET_MOVIES_DATA = 'SET_MOVIES_DATA';
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';

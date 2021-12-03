@@ -3,7 +3,10 @@ import './preloader.css';
 
 function Preloader() {
     return(
-        <img src={preloaderGif} alt="loading..." className='preloader'/>
+        <div className='preloader'>
+            <img src={preloaderGif} alt="loading..."/>
+        </div>
+        
     )
 }
 export default Preloader;

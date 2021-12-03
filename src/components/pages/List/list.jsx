@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Preloader from '../preloader';
 import './List.css';
 function List({ moviesList }) {
-    console.log(moviesList);
+    // console.log(moviesList);
     const genresList = useCallback((ganresArray) => ganresArray.join(', '), []);
 
     return (
