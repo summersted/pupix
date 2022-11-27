@@ -4,10 +4,9 @@ import { endLoadingData, startLoadingData } from "./loadingActions";
 
 export const getMoviesData = () => async dispatch => {
     dispatch(startLoadingData());
-    const data = await getShows(1).then(res => res);
+    const data = await getShows(1);
     await dispatch(setMoviesData(data));
     await dispatch(endLoadingData());
-
 }
 
 export const setMoviesData = (data) => ({

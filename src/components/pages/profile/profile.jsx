@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Container, Image, Tabs, Tab, InputGroup, Button, FormControl } from "react-bootstrap";
+import { Container, Image, Tabs, Tab, InputGroup, Button, FormControl, ListGroup } from "react-bootstrap";
 import './profile.css';
 import LikedShowsList from "../likedShowsList";
 import { getLikedShows, getUserData } from "../../services";
+import { LinkContainer } from "react-router-bootstrap";
 
-function Profile({isAuthenticated}) {
+function Profile({ isAuthenticated }) {
     const _id = JSON.parse(localStorage.getItem('userData')).userId;
     const [likedShowsObject, setLikedShowsObject] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -12,8 +13,7 @@ function Profile({isAuthenticated}) {
     const [key, setKey] = useState('info');
 
     useEffect(() => {
-        getLikedShows({ _id }).then(res => setLikedShowsObject(res));
-        getUserData({_id}).then(res => setUserData(res));
+        getUserData({ _id }).then(res => setUserData(res.user));
     }, []);
     return (
         <>
@@ -24,29 +24,15 @@ function Profile({isAuthenticated}) {
                 <div className="vertical-separator"></div>
                 <div className="wrapper-list">
                     <h2>{userData?.user?.email}</h2>
-                    <Tabs
-                        id="controlled-tab-example"
-                        activeKey={key}
-                        onSelect={(k) => setKey(k)}
-                        className="mb-3"
-                    >
-                        <Tab eventKey="info" title="Information">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Text id="basic-addon1">username: </InputGroup.Text>
-                                <FormControl
-                                    aria-label="Small"
-                                    aria-describedby="inputGroup-sizing-sm"
-                                    placeholder="this feature is not yet supported"
-                                    />
-                                <Button disabled="true" >Change</Button>
-                            </InputGroup>
-                        </Tab>
-                        <Tab eventKey="Liked" title="Liked">
-                        {likedShowsObject ? (
-                                <LikedShowsList showsList={likedShowsObject.likedShowsId} />
-                            ) : 'loading'}
-                        </Tab>
-                    </Tabs>
+                    <h3>Tests assigned to me:</h3>
+                    <ListGroup>
+                        <ListGroup.Item style={{ display: 'flex', justifyContent: 'space-between', width: '90%' }}>
+                            <span>Examle Test</span>
+                            <LinkContainer to={`/passing-test/${userData?.asignedTestsId[0] }`}>
+                                <Button variant="primary">start test</Button>
+                            </LinkContainer>
+                        </ListGroup.Item>
+                    </ListGroup>
                 </div>
             </Container>
         </>

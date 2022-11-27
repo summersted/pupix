@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Carousel, Row, Col, Container } from "react-bootstrap";
+import { Carousel, Row, Col, Container, Image } from "react-bootstrap";
 import { getShowbyId } from "../../services";
 import './homepage.css';
 
@@ -23,29 +23,17 @@ function Homepage() {
         <main>
             <Row>
                 <Col md={6} className="mb-4">
-                    <Carousel activeIndex={index} onSelect={handleSelect}>
-                        {showsData.map((item, i) => {
-                            return (
-                                <Carousel.Item>
-                                    <img
-                                        className="d-block w-100"
-                                        src={item ? item.image.original :
-                                            <div className="img-no-photo">No photo</div>}
-                                        alt="carousel"
-                                    />
-                                    <Carousel.Caption>
-                                        <h3 >{item.name}</h3>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            )
-                        })}
-                    </Carousel>
+                    <Image
+                        width="650px"
+                        style={{marginTop: 20}}
+                        src="https://www.hikeqa.com/wp-content/uploads/2021/01/test_setup.png"
+                        alt="Wellcome to Testix" />
                 </Col>
                 <Col md={6}>
                     <Container>
-                        <h2 id="h2-greeting"> Wellcome to Pupex!</h2>
+                        <h2 id="h2-greeting"> Wellcome to Testix!</h2>
                         <hr />
-                        <p id='homepage-describe'>Nice to see you here. I hope you wouldn`t look for bugs on this resource.</p>
+                        <p id='homepage-describe'>Nice to see you here. Here you can create your own tests and questions, assign it to asnother users and get the result of your testers.</p>
                     </Container>
                 </Col>
             </Row>

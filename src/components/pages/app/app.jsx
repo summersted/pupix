@@ -20,6 +20,11 @@ import Episodes from '../episodes';
 import Search from '../search';
 import Homepage from '../homepage';
 import HumanProfile from '../humanProfile';
+import UsersPage from '../users';
+import TestsPage from '../tests';
+import QuestionsPage from '../questions';
+import PassingTestPage from '../passingTestPage';
+import ResultPage from '../resultPage';
 
 
 function App() {
@@ -28,11 +33,11 @@ function App() {
     //set flag converting token to boolean type
     const isAuthenticated = !!token;
     return (
-        <AuthContext.Provider value={{ 
+        <AuthContext.Provider value={{
             login, logout, token, userId, isAuthenticated
-            }}>
+        }}>
             <Router>
-                <NavMenu isAuthenticated={isAuthenticated}/>
+                <NavMenu isAuthenticated={isAuthenticated} />
                 <Switch>
                     <Route exact path="/" component={Homepage} />
                     <Route path="/login" component={LogIn} />
@@ -40,16 +45,15 @@ function App() {
                     {isAuthenticated ? (
                         <Route path="/profile" component={Profile} />
                     ) : (
-                        <Route path="/profile"> 
-                        <Redirect to="/login" />
+                        <Route path="/profile">
+                            <Redirect to="/login" />
                         </Route>
                     )}
-                    <Route path="/shows/:id/seasons" component={Seasons} />
-                    <Route path="/shows/:id/episodes" component={Episodes} />
-                    <Route path="/shows/:id" component={Show} />
-                    <Route path="/people/:id" component={HumanProfile} />
-                    <Route path="/shows" component={Features} />
-                    <Route path="/search" component={Search} />
+                    <Route path="/users" component={UsersPage} />
+                    <Route path="/tests" component={TestsPage} />
+                    <Route path="/passing-test/:id" component={PassingTestPage} />
+                    <Route path="/questions" component={QuestionsPage} />
+                    <Route path="/results" component={ResultPage} />
                     <Route component={PageNotFound} />
                 </Switch>
             </Router>

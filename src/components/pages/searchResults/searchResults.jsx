@@ -1,18 +1,27 @@
 import { useEffect, useState } from "react";
-import { getResByQuerry, getPeople } from "../../services";
+import { getResByQuerry, getPeople, getUsersByQuerry, getTestsByQuerry, getQuestionsByQuerry, getAllUsers, getAllQuestions, getAllTests } from "../../services";
 import PeopleList from "../peopleList";
 import List from "../List";
+import { getUsersData } from "../../../redux/actions/usersActions";
 
-function SearchResults({ querry, qtype }) {
+function SearchResults({
+    querry,
+    qtype,
+    selectable = false,
+    selectCallback = () => { }
+}) {
     const [result, setResult] = useState([]);
 
     function fetchDataByType(qtype) {
         switch (qtype) {
-            case 'people':
-                getPeople(querry).then(res => setResult(res.map((item) => item.person)));
+            case 'users':
+                getUsersByQuerry(querry).then(res => setResult(res.users));
                 break;
-            case 'search':
-                getResByQuerry(querry).then(res => setResult(res.map((item) => item.show)));
+            case 'questions':
+                getQuestionsByQuerry(querry).then(res => setResult(res.questions));
+                break;
+            case 'tests':
+                getTestsByQuerry(querry).then(res => setResult(res.tests));
                 break;
             case null:
                 break;
@@ -21,30 +30,50 @@ function SearchResults({ querry, qtype }) {
         }
     }
 
+    function fetchAllDataByType(qtype) {
+        switch (qtype) {
+            case 'users':
+                getAllUsers().then(res => setResult(res.users));
+                break;
+            case 'questions':
+                getAllQuestions().then(res => setResult(res.questions));
+                break;
+            case 'tests':
+                getAllTests().then(res => setResult(res.tests));
+                break;
+            case null:
+                break;
+            default:
+                break;
+        }
+    }
     useEffect(() => {
-        fetchDataByType(qtype);
+        fetchAllDataByType(qtype);
+    }, []);
+
+    useEffect(() => {
+        if (querry === undefined) {
+            fetchDataByType(qtype);
+        }
     }, [querry, qtype]);
 
-    switch (qtype) {
-        case 'search':
-            return (
-                <>
-                    {result ? (
-                            <List moviesList={result} />)
-                        : (<h2>Nothing to display.</h2>)}
-                </>
-            );
-        case 'people':
-            return (
-                <>
-                    {result ? <PeopleList list={result} /> : 'popa'}
-                </>
-            );
-
-        default:
-            return (
-                <h2>Nothing to display.</h2>
-            )
+    if (result) {
+        return (
+            <>
+                {result ? (
+                    <List
+                        list={result}
+                        type={qtype}
+                        selectable={selectable}
+                        selectCallback={selectCallback}
+                    />)
+                    : (<h2>Nothing to display.</h2>)}
+            </>
+        )
+    } else {
+        return (
+            <h2>Nothing to displaya.</h2>
+        )
     }
 }
 
